@@ -12,7 +12,8 @@ const { Header, Content } = Layout;
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const pathname = window.location.pathname;
+  const pathname =
+    (typeof window !== "undefined" && window.location.pathname) || "";
   console.log(pathname);
   const { isLogged, user } = useContext(UserContext);
   const { setReadingList } = useContext(BooksContext);
