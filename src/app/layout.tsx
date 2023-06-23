@@ -20,7 +20,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
       router.push("/");
       getReadingList();
     } else {
-      router.push("/auth/login");
+      router.replace("/auth/login");
     }
   }, [isLogged]);
 
