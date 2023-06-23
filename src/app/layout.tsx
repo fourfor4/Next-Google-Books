@@ -2,8 +2,7 @@
 import { UserContext, UserProvider } from "@/contexts/UserContext";
 import { BooksContext, BooksProvider } from "@/contexts/BooksContext";
 import "./globals.css";
-import { Inter } from "next/font/google";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Layout } from "antd";
 import Navbar from "@/components/Navbar";
@@ -13,21 +12,17 @@ const { Header, Content } = Layout;
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const pathname = window.location.pathname;
+  console.log(pathname);
   const { isLogged, user } = useContext(UserContext);
   const { setReadingList } = useContext(BooksContext);
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
-
   useEffect(() => {
-    if (loggedIn) {
+    if (isLogged) {
       router.push("/");
       getReadingList();
     } else {
-      router.replace("/auth/login");
+      if (pathname !== "/auth/login") router.push("/auth/login");
     }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    setLoggedIn(isLogged);
   }, [isLogged]);
 
   const getReadingList = async () => {
