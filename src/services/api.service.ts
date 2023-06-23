@@ -30,8 +30,8 @@ const getReadingList = async () => {
   return res;
 };
 
-const addBookToReadingList = async (book: IBook) => {
-  const res = await axios.post("/api/book", book);
+const addBookToReadingList = async (book: IBook, userId: string) => {
+  const res = await axios.post(`/api/book/?userId=${userId}`, book);
   return res;
 };
 

@@ -9,9 +9,11 @@ const { addSuccessMsg, addFailedMsg, removeSuccessMsg, removeFailedsMsg } =
   text;
 connectToDatabase();
 
-export async function GET() {
+export async function GET(req: Request) {
+  const query = new URL(req.url).searchParams;
+  const userId = query.get("userId");
   try {
-    const books = await Book.find();
+    const books = await Book.find({ userId });
     return NextResponse.json({ success: true, books });
   } catch {
     return NextResponse.json("error", {
@@ -21,11 +23,13 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const query = new URL(req.url).searchParams;
+  const userId = query.get("userId");
   try {
     const body: IBook = await req.json();
     const newPost = new Book(body);
     await newPost.save();
-    const books = await Book.find();
+    const books = await Book.find({ userId });
     return NextResponse.json({ success: true, msg: addSuccessMsg, books });
   } catch {
     return NextResponse.json({
@@ -41,7 +45,7 @@ export async function DELETE(req: Request) {
   const userId = query.get("userId");
   try {
     await Book.findOneAndDelete({ id: bookId, userId });
-    const books = await Book.find();
+    const books = await Book.find({ userId });
     return NextResponse.json({ success: true, msg: removeSuccessMsg, books });
   } catch (error) {
     console.log(error);

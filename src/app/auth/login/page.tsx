@@ -26,6 +26,7 @@ export default function Login() {
         message.success(data.msg);
         setIsLogged(true);
         localStorage.setItem("loginStatus", "true");
+        localStorage.setItem("user", JSON.stringify(data.user));
         setUser(data.user);
       } else {
         message.error(data.msg);

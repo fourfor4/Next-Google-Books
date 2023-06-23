@@ -30,10 +30,13 @@ const BookItem: React.FC<Props> = ({ book, fav }) => {
 
   const handleSaveToReadingList = async () => {
     try {
-      const res = await apiService.addBookToReadingList({
-        ...book,
-        userId: user._id,
-      });
+      const res = await apiService.addBookToReadingList(
+        {
+          ...book,
+          userId: user._id,
+        },
+        user._id as string
+      );
       const { data } = res;
       if (data.success) {
         message.success(data.msg);

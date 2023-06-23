@@ -26,8 +26,12 @@ export const UserProvider = ({ ...props }) => {
   const loggedStatus =
     (typeof window !== "undefined" && localStorage.getItem("loginStatus")) ||
     "false";
-  console.log(false || (loggedStatus === "true" ? true : false));
-  const [user, setUser] = useState<IUser>({ email: "", name: "" });
+
+  const userInfo =
+    typeof window !== "undefined" && localStorage.getItem("user");
+  const [user, setUser] = useState<IUser>(
+    userInfo ? JSON.parse(userInfo) : { email: "", name: "" }
+  );
   const [isLogged, setIsLogged] = useState<boolean>(
     false || (loggedStatus === "true" ? true : false)
   );
