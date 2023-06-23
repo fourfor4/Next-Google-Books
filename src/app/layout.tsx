@@ -3,7 +3,7 @@ import { UserContext, UserProvider } from "@/contexts/UserContext";
 import { BooksContext, BooksProvider } from "@/contexts/BooksContext";
 import "./globals.css";
 import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Layout } from "antd";
 import Navbar from "@/components/Navbar";
 import apiService from "@/services/api.service";
@@ -12,17 +12,16 @@ const { Header, Content } = Layout;
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const pathname =
-    (typeof window !== "undefined" && window.location.pathname) || "";
-  console.log(pathname);
+  const pathname = usePathname();
   const { isLogged, user } = useContext(UserContext);
   const { setReadingList } = useContext(BooksContext);
   useEffect(() => {
     if (isLogged) {
-      router.prefetch("/");
+      router.push("/", { forceHardNavigation: true });
       getReadingList();
     } else {
-      if (pathname !== "/auth/login") router.prefetch("/auth/login");
+      if (pathname !== "/auth/login")
+        router.replace("/auth/login", { forceHardNavigation: true });
     }
   }, [isLogged]);
 
