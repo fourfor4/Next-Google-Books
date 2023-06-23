@@ -19,10 +19,10 @@ const App = ({ children }: { children: React.ReactNode }) => {
   const { setReadingList } = useContext(BooksContext);
   useEffect(() => {
     if (isLogged) {
-      router.push("/");
+      router.prefetch("/");
       getReadingList();
     } else {
-      if (pathname !== "/auth/login") router.push("/auth/login");
+      if (pathname !== "/auth/login") router.prefetch("/auth/login");
     }
   }, [isLogged]);
 
