@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "CI=false && rimraf ./build && next --max_old_space_size=4096 build && rimraf ./build/**/*.map",
+    "build": "CI=false && next build",
     "start": "next start",
     "lint": "next lint"
   },
