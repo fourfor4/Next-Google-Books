@@ -13,7 +13,7 @@ const { Header, Content } = Layout;
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const { isLogged } = useContext(UserContext);
+  const { isLogged, user } = useContext(UserContext);
   const { setReadingList } = useContext(BooksContext);
 
   useEffect(() => {
@@ -23,11 +23,11 @@ const App = ({ children }: { children: React.ReactNode }) => {
     } else {
       router.replace("/auth/login");
     }
-  }, [isLogged]);
+  }, [isLogged, user]);
 
   const getReadingList = async () => {
     try {
-      const res = await apiService.getReadingList();
+      const res = await apiService.getReadingList(user._id as string);
       const { data } = res;
 
       if (data.success) {

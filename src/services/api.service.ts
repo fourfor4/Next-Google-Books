@@ -25,8 +25,8 @@ const getBooks = async (query: string, maxResult: number) => {
   return res;
 };
 
-const getReadingList = async () => {
-  const res = await axios.get("/api/book");
+const getReadingList = async (userId: string) => {
+  const res = await axios.get(`/api/book/?userId=${userId}`);
   return res;
 };
 
