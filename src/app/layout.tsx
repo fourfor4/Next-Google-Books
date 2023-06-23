@@ -17,7 +17,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
   const { setReadingList } = useContext(BooksContext);
   useEffect(() => {
     if (isLogged) {
-      router.push("/", { forceHardNavigation: true });
+      router.replace("/", { forceHardNavigation: true });
       getReadingList();
     } else {
       if (pathname !== "/auth/login")
