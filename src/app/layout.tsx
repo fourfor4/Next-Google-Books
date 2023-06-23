@@ -15,15 +15,20 @@ const App = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const { isLogged, user } = useContext(UserContext);
   const { setReadingList } = useContext(BooksContext);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isLogged) {
+    if (loggedIn) {
       router.push("/");
       getReadingList();
     } else {
       router.replace("/auth/login");
     }
-  }, [isLogged, user]);
+  }, [loggedIn]);
+
+  useEffect(() => {
+    setLoggedIn(isLogged);
+  }, [isLogged]);
 
   const getReadingList = async () => {
     try {
