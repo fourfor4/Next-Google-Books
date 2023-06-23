@@ -17,11 +17,12 @@ const App = ({ children }: { children: React.ReactNode }) => {
   const { setReadingList } = useContext(BooksContext);
   useEffect(() => {
     if (isLogged) {
-      router.replace("/", { forceOptimisticNavigation: true });
+      router.replace("/");
       getReadingList();
+      router.refresh();
     } else {
-      if (pathname !== "/auth/login")
-        router.replace("/auth/login", { forceOptimisticNavigation: true });
+      router.replace("/auth/login");
+      router.refresh();
     }
   }, [isLogged]);
 
