@@ -22,7 +22,7 @@
 - Store the fav books in the MongoDB with user info
 - Implemented UI with Ant Design
 - Hosted on Netlify
-- Not add unit test and commits, because I have done them in the React version. So you can check React version for working progress with commits and
+- Not add unit test and commits, because I have done them in the React version. So you can check React version for working progress with commits and issues.
 
 <br />
 
