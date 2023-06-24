@@ -11,17 +11,14 @@ import apiService from "@/services/api.service";
 const { Header, Content } = Layout;
 
 const App = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
   const { isLogged, user } = useContext(UserContext);
   const { setReadingList } = useContext(BooksContext);
   useEffect(() => {
     if (isLogged) {
-      router.push("/");
       getReadingList();
     } else {
-      router.push("/auth/login");
     }
-  }, [isLogged]);
+  }, [isLogged, user]);
 
   const getReadingList = async () => {
     try {

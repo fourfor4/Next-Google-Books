@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/contexts/UserContext";
 import { Button, message, Form, Input, Typography, Layout } from "antd";
 import Link from "next/link";
 import apiService from "@/services/api.service";
 import constants from "@/constants";
+import { useRouter } from "next/navigation";
 
 const { Content } = Layout;
 const { text } = constants;
@@ -13,8 +14,13 @@ const { authMsg } = text;
 const { loginFailedMsg } = authMsg;
 
 export default function Login() {
-  const { setIsLogged, setUser } = useContext(UserContext);
+  const router = useRouter();
+  const { setIsLogged, setUser, isLogged } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isLogged) router.push("/");
+  }, [isLogged]);
 
   const onFinish = async (values: any) => {
     const { email, password } = values;

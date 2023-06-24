@@ -6,10 +6,13 @@ import { BooksContext } from "@/contexts/BooksContext";
 import { IBook } from "@/interfaces";
 import apiService from "@/services/api.service";
 import BookItem from "@/components/Book.item";
+import { UserContext } from "@/contexts/UserContext";
+import { useRouter } from "next/navigation";
 
 const { Content } = Layout;
 const maxResult = 5;
 export default function Home() {
+  const router = useRouter();
   const {
     readingList,
     searchQuery,
@@ -18,8 +21,14 @@ export default function Home() {
     setSearchResult,
   } = useContext(BooksContext);
 
+  const { isLogged } = useContext(UserContext);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [searchForm] = Form.useForm();
+
+  useEffect(() => {
+    if (!isLogged) router.push("/auth/login");
+  }, [isLogged]);
 
   useEffect(() => {
     searchForm.setFieldsValue({ query: searchQuery });
