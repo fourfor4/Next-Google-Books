@@ -1,6 +1,5 @@
 import { connect, connection } from "mongoose";
 const { MONGO_URI = "" } = process.env;
-console.log("env ------", process.env);
 
 const options: any = {
   useUnifiedTopology: true,
