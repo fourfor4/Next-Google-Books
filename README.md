@@ -1,4 +1,4 @@
-![Google Book Search screenshot](./popcorn-books.png?raw=true "Google Book Search")
+![Google Book Search screenshot](./next-popcorn-books.png?raw=true "Google Book Search")
 <br />
 
 [View Live](https://next-popcorn-books.netlify.app)
