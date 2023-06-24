@@ -1,7 +1,5 @@
 import { connect, connection } from "mongoose";
-const {
-  MONGO_URI = "mongodb+srv://ivarduserud0322:WFRK8EBks2beMqWA@cluster0.gysrhiz.mongodb.net/popcorn",
-} = process.env;
+const { MONGO_URI = "" } = process.env;
 
 const options: any = {
   useUnifiedTopology: true,
